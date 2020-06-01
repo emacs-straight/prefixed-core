@@ -246,5 +246,222 @@
 (defalias 'keymap-use-local-map #'use-local-map)   ;FIXME: setf
 (defalias 'keymap-use-global-map #'use-global-map) ;FIXME: setf
 
+;;;; Hash tables
+(defalias 'hash-make-table #'make-hash-table)
+(defalias 'hash-get #'gethash)
+(defalias 'hash-put #'puthash)
+(defalias 'hash-rem #'remhash)
+(defalias 'hash-clr #'clrhash)
+(defalias 'hash-map #'maphash)
+(defalias 'hash-define-table-test #'define-hash-table-test)
+(defalias 'hash-copy #'copy-hash-table)
+
+;;;; Symbols
+(defalias 'symbol-make #'make-symbol)
+(defalias 'symbol-gen #'gensym)         ;FIXME: unrenameable, badname
+(defalias 'symbol-get #'get)
+(defalias 'symbol-put #'put)
+(defalias 'symbol-set-plist #'setplist)
+(defalias 'symbol-function-get #'function-get)
+(defalias 'symbol-function-put #'function-put)
+
+;;;; Obarrays
+(defalias 'obarray-intern #'intern)
+(defalias 'obarray-intern-soft #'intern-soft)
+(defalias 'obarray-map #'mapatoms)
+(defalias 'obarray-unintern #'unintern) ;FIXME: Should it in `symbol-'?
+
+;;;; Byte code
+;; FIXME: For compile&disassemble, I'm not sure the "byte-" prefix is right,
+;; since the fact that they currently operate using byte-code is a kind
+;; of internal detail.
+(defalias 'byte-compile-defun #'compile-defun)
+(defalias 'byte-batch-compile #'batch-byte-compile) ;FIXME: `batch-' prefix
+(defalias 'byte-fetch-code #'fetch-bytecode)        ;FIXME: obsolete/internal
+(defalias 'byte-make-code #'make-byte-code)         ;FIXME: `byte-code-' prefix?
+(defalias 'byte-disassemble #'disassemble)
+
+;;;; Debugging
+(defalias 'debug-cancel-on-entry #'cancel-debug-on-entry) ;FIXME: badname
+(defalias 'debug-cancel-on-variable-change #'cancel-debug-on-variable-change)
+(defalias 'backtrace-map #'mapbacktrace)
+
+;;;; Minibuffer
+;; FIXME: These should not be too controversial (famous last words).
+(defalias 'minibuffer-exit-minibuffer #'exit-minibuffer)
+(defalias 'minibuffer-self-insert-and-exit #'self-insert-and-exit)
+(defalias 'minibuffer-set-window #'set-minibuffer-window) ;FIXME: neverused
+;;(defalias 'minibuffer-window-p #'window-minibuffer-p) ;FIXME: `window-' prefix
+(defalias 'minibuffer-active-window #'active-minibuffer-window)
+(defalias 'minibuffer-delete-contents #'delete-minibuffer-contents)
+(defalias 'minibuffer-read-from #'read-from-minibuffer)
+(defalias 'minibuffer-read #'read-minibuffer) ;FIXME: ..-read-sexp?
+(defalias 'minibuffer-eval #'eval-minibuffer) ;FIXME: `eval-' prefix?
+
+;; Minibuffer - Should these be prefixed with `history-' instead?
+;; FIXME: I think so, or maybe `minibuffer-history-'?
+(defalias 'minibuffer-add-to-history #'add-to-history)
+(defalias 'minibuffer-next-complete-history-element
+  #'next-complete-history-element)
+(defalias 'minibuffer-next-history-element #'next-history-element)
+(defalias 'minibuffer-next-matching-history-element
+  #'next-matching-history-element)
+(defalias 'minibuffer-previous-complete-history-element
+  #'previous-complete-history-element)
+(defalias 'minibuffer-previous-history-element #'previous-history-element)
+(defalias 'minibuffer-previous-matching-history-element
+  #'previous-matching-history-element)
+
+;; Minibuffer - Should these be prefixed with `completion-' instead?
+;; FIXME: The whole completion scene is broken for the following reasons:
+;; - It was originally written only for minibuffer-completion, so a lot of
+;;   it accidentally uses "minibuffer-" even tho it has nothing to do
+;;   with a minibuffer.
+;; - The completion.el package collides with a sane naming.
+;; To answer the above question: yes these should not have a "minibuffer-"
+;; prefix because they have nothing to do with the minibuffer.
+;; And there should be different prefixes for things related to
+;; completion *tables* and for those related to completion UIs.
+;;(defalias 'minibuffer-all-completions #'all-completions)
+;;(defalias 'minibuffer-completing-read #'completing-read)
+;;(defalias 'minibuffer-completion-boundaries #'completion-boundaries)
+;;(defalias 'minibuffer-completion-in-region #'completion-in-region)
+;;(defalias 'minibuffer-completion-table-dynamic #'completion-table-dynamic)
+;;(defalias 'minibuffer-completion-table-with-cache #'completion-table-with-cache)
+;;(defalias 'minibuffer-display-completion-list #'display-completion-list)
+;;(defalias 'minibuffer-test-completion #'test-completion)
+;;(defalias 'minibuffer-try-completion #'try-completion)
+
+;; These should probably be deleted and remain as `read-'
+;; FIXME; Agreed.
+;;(defalias 'minibuffer-read-answer #'read-answer)
+;;(defalias 'minibuffer-read-buffer #'read-buffer)
+;;(defalias 'minibuffer-read-color #'read-color)
+;;(defalias 'minibuffer-read-command #'read-command)
+;;(defalias 'minibuffer-read-directory-name #'read-directory-name)
+;;(defalias 'minibuffer-read-file-name #'read-file-name)
+;;(defalias 'minibuffer-read-passwd #'read-passwd)
+;;(defalias 'minibuffer-read-shell-command #'read-shell-command)
+;;(defalias 'minibuffer-read-variable #'read-variable)
+
+;; These I don't know what to do
+;; FIXME: Most don't really belong in "minibuffer-" because they don't
+;; necessarily operate in or using a minibuffer.
+;;(defalias 'minibuffer-y-or-n-p #'y-or-n-p)
+;;(defalias 'minibuffer-y-or-n-p-with-timeout #'y-or-n-p-with-timeout)
+;;(defalias 'minibuffer-yes-or-no-p #'yes-or-no-p)
+;;(defalias 'minibuffer-map-y-or-n-p #'map-y-or-n-p)
+(defalias 'minibuffer-edit-and-eval-command #'edit-and-eval-command) ;FIXME: internal?
+
+;;;; Windows
+(defalias 'window-adjust-trailing-edge #'adjust-window-trailing-edge)
+(defalias 'window-balance #'balance-windows)
+(defalias 'window-balance-area #'balance-windows-area)
+(defalias 'window-compare-configurations #'compare-window-configurations)
+(defalias 'window-coordinates-in-p #'coordinates-in-window-p)
+(defalias 'window-current-configuration #'current-window-configuration)
+(defalias 'window-delete #'delete-window)
+(defalias 'window-delete-on #'delete-windows-on)
+(defalias 'window-delete-other #'delete-other-windows)
+(defalias 'window-display-buffer-in-atom #'display-buffer-in-atom-window)
+(defalias 'window-display-buffer-in-side #'display-buffer-in-side-window)
+(defalias 'window-fit-to-buffer #'fit-window-to-buffer)
+(defalias 'window-get--with-predicate #'get-window-with-predicate)
+(defalias 'window-get-buffer #'get-buffer-window)
+(defalias 'window-get-buffer-list #'get-buffer-window-list)
+(defalias 'window-get-largest #'get-largest-window)
+(defalias 'window-get-lru #'get-lru-window)
+(defalias 'window-get-mru #'get-mru-window)
+(defalias 'window-maximize #'maximize-window)
+(defalias 'window-minimize #'minimize-window)
+(defalias 'window-next #'next-window)
+(defalias 'window-one--p #'one-window-p)
+(defalias 'window-other #'other-window)
+(defalias 'window-pop-to-buffer #'pop-to-buffer)
+(defalias 'window-pos-visible-in-group-p #'pos-visible-in-window-group-p)
+(defalias 'window-pos-visible-in-p #'pos-visible-in-window-p)
+(defalias 'window-previous #'previous-window)
+(defalias 'window-quit #'quit-window)
+(defalias 'window-quit-restore #'quit-restore-window)
+(defalias 'window-recenter #'recenter)
+(defalias 'window-recenter-group #'recenter-window-group)
+(defalias 'window-recenter-top-bottom #'recenter-top-bottom)
+(defalias 'window-replace-buffer-ins #'replace-buffer-in-windows)
+(defalias 'window-run-configuration-change-hook #'run-window-configuration-change-hook)
+(defalias 'window-run-scroll-functions #'run-window-scroll-functions)
+(defalias 'window-select #'select-window)
+(defalias 'window-selected #'selected-window)
+(defalias 'window-selected-group #'selected-window-group)
+(defalias 'window-set--combination-limit #'set-window-combination-limit)
+(defalias 'window-set-buffer #'set-window-buffer)
+(defalias 'window-set-configuration #'set-window-configuration)
+(defalias 'window-set-dedicated-p #'set-window-dedicated-p)
+(defalias 'window-set-group-start #'set-window-group-start)
+(defalias 'window-set-hscroll #'set-window-hscroll)
+(defalias 'window-set-next-buffers #'set-window-next-buffers)
+(defalias 'window-set-parameter #'set-window-parameter)
+(defalias 'window-set-point #'set-window-point)
+(defalias 'window-set-prev-buffers #'set-window-prev-buffers)
+(defalias 'window-set-start #'set-window-start)
+(defalias 'window-set-vscroll #'set-window-vscroll)
+(defalias 'window-shrink-larger-than-buffer #'shrink-window-if-larger-than-buffer)
+(defalias 'window-split #'split-window)
+(defalias 'window-split-below #'split-window-below)
+(defalias 'window-split-right #'split-window-right)
+(defalias 'window-split-sensibly #'split-window-sensibly)
+(defalias 'window-switch-to-buffer #'switch-to-buffer)
+(defalias 'window-switch-to-buffer-other #'switch-to-buffer-other-window)
+(defalias 'window-switch-to-next-buffer #'switch-to-next-buffer)
+(defalias 'window-switch-to-prev-buffer #'switch-to-prev-buffer)
+(defalias 'window-walk #'walk-windows)
+
+;; FIXME: We'd probably delete them and keep them under `scroll-'
+(defalias 'window-scroll-down #'scroll-down)
+(defalias 'window-scroll-down-command #'scroll-down-command)
+(defalias 'window-scroll-left #'scroll-left)
+(defalias 'window-scroll-other #'scroll-other-window)
+(defalias 'window-scroll-right #'scroll-right)
+(defalias 'window-scroll-up #'scroll-up)
+(defalias 'window-scroll-up-command #'scroll-up-command)
+
+;;;; Terminal
+(defalias 'terminal-delete #'delete-terminal)
+(defalias 'terminal-get-device #'get-device-terminal)
+(defalias 'terminal-set-parameter #'set-terminal-parameter)
+
+;;;; Frames
+(defalias 'frame-current-configuration #'current-frame-configuration)
+(defalias 'frame-delete #'delete-frame)
+(defalias 'frame-delete-other #'delete-other-frames)
+(defalias 'frame-gui-get-selection #'gui-get-selection)
+(defalias 'frame-gui-set-selection #'gui-set-selection)
+(defalias 'frame-handle-switch #'handle-switch-frame)
+(defalias 'frame-iconify #'iconify-frame)
+(defalias 'frame-lower #'lower-frame)
+(defalias 'frame-make #'make-frame)
+(defalias 'frame-make-invisible #'make-frame-invisible)
+(defalias 'frame-make-on-display #'make-frame-on-display)
+(defalias 'frame-make-visible #'make-frame-visible)
+(defalias 'frame-modify-all-parameters #'modify-all-frames-parameters)
+(defalias 'frame-modify-parameters #'modify-frame-parameters)
+(defalias 'frame-mouse-absolute-pixel-position #'mouse-absolute-pixel-position)
+(defalias 'frame-mouse-pixel-position #'mouse-pixel-position)
+(defalias 'frame-mouse-position #'mouse-position)
+(defalias 'frame-next #'next-frame)
+(defalias 'frame-previous #'previous-frame)
+(defalias 'frame-raise #'raise-frame)
+(defalias 'frame-redirect-focus #'redirect-frame-focus)
+(defalias 'frame-select #'select-frame)
+(defalias 'frame-select-set-input-focus #'select-frame-set-input-focus)
+(defalias 'frame-selected #'selected-frame)
+(defalias 'frame-set-configuration #'set-frame-configuration)
+(defalias 'frame-set-font #'set-frame-font)
+(defalias 'frame-set-height #'set-frame-height)
+(defalias 'frame-set-parameter #'set-frame-parameter)
+(defalias 'frame-set-position #'set-frame-position)
+(defalias 'frame-set-size #'set-frame-size)
+(defalias 'frame-set-width #'set-frame-width)
+(defalias 'frame-visible-list #'visible-frame-list)
+
 (provide 'prefixed-core)
 ;;; prefixed-core.el ends here
