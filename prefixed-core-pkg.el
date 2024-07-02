@@ -1,2 +1,0 @@
-;; Generated package description from prefixed-core.el  -*- no-byte-compile: t -*-
-(define-package "prefixed-core" "0.0.20221212.225529" "Rename core functions for a better structured namespace" 'nil :commit "32cf255af5aada47d173c9877487e70c98e30151" :url "https://elpa.gnu.org/packages/prefixed-core.html" :authors '(("Stefan Monnier" . "monnier@iro.umontreal.ca")) :maintainer '("Stefan Monnier" . "monnier@iro.umontreal.ca"))
