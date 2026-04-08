@@ -1,2 +1,2 @@
-;; Generated package description from prefixed-core.el  -*- no-byte-compile: t -*-
-(define-package "prefixed-core" "0.0.20221212.225529" "Rename core functions for a better structured namespace" 'nil :commit "32cf255af5aada47d173c9877487e70c98e30151" :url "https://elpa.gnu.org/packages/prefixed-core.html" :authors '(("Stefan Monnier" . "monnier@iro.umontreal.ca")) :maintainer '("Stefan Monnier" . "monnier@iro.umontreal.ca"))
+;; Generated package description from prefixed-core.el  -*- no-byte-compile: t; lexical-binding:t -*-
+(define-package "prefixed-core" "0.0.20260406.215107" "Rename core functions for a better structured namespace" 'nil :commit "61eee53583d5ab3680c2201ed4a1de48688aa7c7" :url "https://elpa.gnu.org/packages/prefixed-core.html" :authors '(("Stefan Monnier" . "monnier@iro.umontreal.ca")) :maintainer '("Stefan Monnier" . "monnier@iro.umontreal.ca"))
